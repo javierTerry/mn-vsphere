@@ -1,0 +1,34 @@
+# MN-VSPHERE
+Proyecto para al extraccion de informacion para DOMO
+y asu vez obtener reporte y visiblidad de todo los vsphere 
+que tiene MásNegocio
+
+
+Version 0.0.1 (Marzo 24, 2017)
+=======================================
+
+Requieres python versión 2.7+
+Asi como los requerimientos siguientes
+
+[Requerimientos](http://developer.teamwork.com/enabletheapiandgetyourkey)
+
+Así como la URI de nuestro Dashboard, Example (https://personal69.teamwork.com/)
+
+Los recursos disponibles son:
+
+* GET cluster_detail.py
+
+Los recursos pendientes son:
+
+
+
+
+Version 0.0.2 (Marzo 02, 2017)
+=======================================
+
+## Corrección Recuros Mailestone
+* GET /milestones.json?find=[all|completed|incomplete|late|upcoming]
+
+No e obtiene informacion ya que el recurso no existia, para lo cual se agrego las clases petinentes
+
+### TestUnit Mailestone

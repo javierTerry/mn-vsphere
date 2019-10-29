@@ -1,0 +1,11 @@
+#Carpetas u archivos que no seran versionados
+
+logs/*.log
+*.log
+*.csv
+*.pyc
+
+src/*.pyc
+src/config/*
+config/*
+
