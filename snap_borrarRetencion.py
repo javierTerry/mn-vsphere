@@ -152,7 +152,7 @@ class RetencionEliminar:
                             logging.info( vmUuid )
 
                         self.msj = "{} \n {}".format(self.msj, vmUuid)
-                        logging.info ("inia ciclo de borrado de Snaps")
+                        logging.info ("inicia ciclo de borrado de Snaps")
                         for snapshot in snapshots:      
 
                             if ( self.verificaSnap(snapshot) ) : 

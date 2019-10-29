@@ -18,7 +18,7 @@ class Smtp:
 			with open('src/config/config.json') as json_data_file :
 				cfg = json.load(json_data_file)
 
-			self.fromSmtp = "no_replay_default@kionetworks.com"
+			self.fromSmtp = "<No Reply> no_replay_default@kionetworks.com"
 			self.host = cfg['SMTP']
 
 
@@ -31,9 +31,7 @@ class Smtp:
 				Envia un correo sin adjuntos
 			"""
 			message = self.message.format( self.fromSmtp, receivers, subject, body)
-			print self.host
-			print message
-
+			
 			smtpObj = smtplib.SMTP(self.host, 25)
 			smtpObj.sendmail(self.fromSmtp, receivers ,message)         
 			
