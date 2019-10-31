@@ -177,9 +177,11 @@ class RetencionEliminar:
 if __name__=='__main__':  #Cuerpo Principal
     
     timeStart = datetime.now()
+    
     snap = RetencionEliminar()
     
     snap.main()
+   
 
     timeEnd = datetime.now() 
     descripcionTiempo = " Tiempo de inicio {}, tiempo de termino {}".format(timeStart, timeEnd )
@@ -190,8 +192,10 @@ if __name__=='__main__':  #Cuerpo Principal
     logging.info(descripcionTdelta)
     
     msj = "{} \n{}".format(descripcionTdelta,snap.msj)
+
+    subject = "Revision snap - {} - {}".format(snap.args.vsphere,snap.args.host)
     smpt = Smtp()
-    smpt.send("Snap Subject", cfg['NOTIFICATION']['RECEIVERS'], msj)
+    smpt.send(subject, cfg['NOTIFICATION']['RECEIVERS'], msj)
     logging.info("fin del script") 
     sys.exit()
 

@@ -7,5 +7,5 @@ logs/*.log
 
 src/*.pyc
 src/config/*
-config/*
+
 

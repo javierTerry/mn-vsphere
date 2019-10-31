@@ -18,11 +18,11 @@ class Smtp:
 			with open('src/config/config.json') as json_data_file :
 				cfg = json.load(json_data_file)
 
-			self.fromSmtp = "<No Reply> no_replay_default@kionetworks.com"
+			self.fromSmtp = "No Reply no_replay_default@kionetworks.com"
 			self.host = cfg['SMTP']
 
 
-			self.message = """From: From Person {} \nTo: To Person {} \nSubject: {}
+			self.message = """From: {} \nTo: {} \nSubject: {}
 			\nMensaje enviado de forma automatica  \n{}"""
 
 		def send(self, subject, receivers, body):
@@ -39,11 +39,7 @@ class Smtp:
 			smtpObj.quit()
 
 		def send_attach(self, subject, receiver_email,attachText):
-			#smtpObj = smtplib.SMTP('172.19.200.44', 25)
-			#smtpObj.sendmail(self.sender, self.receivers, self.message)         
-			##	print "Successfully sent email"
-
-			# Create secure connection with server and send email
+						# Create secure connection with server and send email
 			context = ssl.create_default_context()
 			
 

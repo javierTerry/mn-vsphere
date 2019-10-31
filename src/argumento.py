@@ -52,6 +52,7 @@ def get():
 def credencialesHipervisor(CFG):
 
     args = get()
+
     VCSA = CFG['VCSA'][args.vsphere]
     args.user       = VCSA['CRED']['USER'] 
     args.password   = VCSA['CRED']['PWD']
