@@ -18,14 +18,16 @@ from src.VirtualMachine import VirtualMachine
 from src.Smtp import Smtp
 from src.Connection import Connection
 
-
-strFileLog = "logs/{}-{}".format(datetime.now().strftime("%Y%m%d"), __file__.replace(".py",".log") )
+ 
+strFileLog = "logs/{}-{}-{}".format(datetime.now().strftime("%Y%m%d"), sys.argv[1],  __file__.replace(".py",".log") )
 with open('src/config/config.json') as json_data_file:
     cfg = json.load(json_data_file)
 
 
 # add filemode="w" to overwrite
-logging.basicConfig(filename=strFileLog, level=logging.INFO)
+logging.basicConfig(filename=strFileLog, level=logging.DEBUG,format='%(asctime)s %(levelname)-8s %(message)s',datefmt='%Y-%m-%d %H:%M:%S')
+
+
 
 debug= True               #Decla""racion de variables Globales
 cdmx = timezone('America/Mexico_City')
@@ -45,25 +47,31 @@ class RetencionEliminar:
         return retencion
 
     def verificaBorrarSnap(self,snapshot):
-        borrarSnap = False 
-        retencionHora = self.obtenerRetencion(snapshot.description)
-        snapCreateTimeStr = snapshot.createTime.astimezone(cdmx).strftime("%Y-%m-%d %H:%M:%S")
-        snapCreateTime = datetime.strptime(snapCreateTimeStr, "%Y-%m-%d %H:%M:%S")
-        
-        actual = datetime.now()
-        actualStr = actual.strftime("%Y-%m-%d %H:%M:%S")
-        boolTiempoRetencion = datetime.now() >  snapCreateTime + timedelta(hours=retencionHora )
-        
-        diasTranscurridos = ( actual - snapCreateTime )
-        logging.info("Tiempo transcurridos del snap {} horas".format(diasTranscurridos))
-        strVerificaBorrar = "Fecha creacion snap {}, fecha actual {} Tiempo trascurridos {} horas, tiempo de retencion {} horas" \
-                        .format(snapCreateTimeStr, actualStr,diasTranscurridos, retencionHora)
-        logging.info( strVerificaBorrar )
-        self.msj = "{} \n{}".format(self.msj, strVerificaBorrar)
+        try:
+            #print "Iniciando verificaBorrarSnap "
+            logging.info("Iniciando verificaBorrarSnap ")
+            borrarSnap = False 
+            retencionHora = self.obtenerRetencion(snapshot.description)
+            snapCreateTimeStr = snapshot.createTime.astimezone(cdmx).strftime("%Y-%m-%d %H:%M:%S")
+            snapCreateTime = datetime.strptime(snapCreateTimeStr, "%Y-%m-%d %H:%M:%S")
+            
+            actual = datetime.now()
+            actualStr = actual.strftime("%Y-%m-%d %H:%M:%S")
+            boolTiempoRetencion = datetime.now() >  snapCreateTime + timedelta(hours=retencionHora )
+            
+            diasTranscurridos = ( actual - snapCreateTime )
+            logging.info("Tiempo transcurridos del snap {} horas".format(diasTranscurridos))
+            strVerificaBorrar = "Fecha creacion snap {}, fecha actual {} Tiempo trascurridos {} horas, tiempo de retencion {} horas" \
+                            .format(snapCreateTimeStr, actualStr,diasTranscurridos, retencionHora)
+            logging.info( strVerificaBorrar )
+            self.msj = "{} \n{}".format(self.msj, strVerificaBorrar)
 
-        if ( retencionHora != 0 and  boolTiempoRetencion ):
-            logging = True
-            logging.info( "VerificaBorrarSnap return {}".format(borrarSnap) )
+            if ( retencionHora != 0 and  boolTiempoRetencion ):
+                borrarSnap = True
+                logging.info( "VerificaBorrarSnap return {}".format(borrarSnap) )
+        except:
+            raise
+            logging.error("An error has happened! in verificaBorrarSnap")
 
         return borrarSnap
 
@@ -149,10 +157,10 @@ class RetencionEliminar:
                         """
 
                         if (len(snapshots) > 0 ) : 
-                            logging.info( vmUuid )
+                            logging.debug( vmUuid )
 
                         self.msj = "{} \n {}".format(self.msj, vmUuid)
-                        logging.info ("inicia ciclo de borrado de Snaps")
+                        logging.info ("inicia ciclo de borrado de Snaps ---------------")
                         for snapshot in snapshots:      
 
                             if ( self.verificaSnap(snapshot) ) : 
