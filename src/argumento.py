@@ -36,7 +36,7 @@ def get():
     list_parser = subparsers.add_parser('SF20975',help='vSphere Santa Fe')
     list_parser = subparsers.add_parser('ALICA', help='vSphere ALICA')
     list_parser = subparsers.add_parser('ALSEA', help='vSphere ALSEA')
-    list_parser = subparsers.add_parser('MABE', help='vSphere MABESA')
+    list_parser = subparsers.add_parser('MABESA', help='vSphere MABESA')
     list_parser = subparsers.add_parser('QRO', help='vSphere Queretaro')
     list_parser = subparsers.add_parser('REDIT', help='vSphere REDIT')
     list_parser = subparsers.add_parser('INTERLOMAS', help='vSphere Interlomas')
