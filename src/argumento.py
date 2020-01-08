@@ -44,6 +44,7 @@ def get():
     list_parser = subparsers.add_parser('PANAMA', help='vSphere PANAMA')
     list_parser = subparsers.add_parser('MEDICASUR', help='vSphere MEDICASUR')
     list_parser = subparsers.add_parser('DRPCAME', help='vSphere DRPCAME')
+    list_parser = subparsers.add_parser('DRPSIVALE', help='vSphere DRPSIVALE')
 
     
     return parser.parse_args()
