@@ -45,6 +45,8 @@ def get():
     list_parser = subparsers.add_parser('MEDICASUR', help='vSphere MEDICASUR')
     list_parser = subparsers.add_parser('DRPCAME', help='vSphere DRPCAME')
     list_parser = subparsers.add_parser('DRPSIVALE', help='vSphere DRPSIVALE')
+    list_parser = subparsers.add_parser('VCLOUD', help='vSphere DRPSIVALE')
+    list_parser = subparsers.add_parser('COMEX', help='vSphere DRPSIVALE')
 
     
     return parser.parse_args()
